@@ -1,5 +1,2 @@
-require "nba_schedule/version"
-
-module NbaSchedule
-  # Your code goes here...
-end
+require_relative "nba_schedule/version"
+require_relative './nba_schedule/cli'
