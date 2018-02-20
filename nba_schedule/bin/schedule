@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+
+NbaSchedule::CLI.new.call
