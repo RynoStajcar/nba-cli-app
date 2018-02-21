@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 require './lib/nba_schedule'
-NbaSchedule::CLI.new.call
+
+ Cli.new.call

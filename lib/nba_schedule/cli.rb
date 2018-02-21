@@ -1,19 +1,17 @@
-class NbaSchedule::CLI
+#!/usr/bin/env ruby
+require "pry"
+class Cli
 
   def call
-    puts "Todays Games!"
-    menu
+    nba_menu
   end
 
-  def menu
-    puts "1. Cavs vs GSW, 7:00pm ET"
-    puts "2. Rockets vs Mavs 9:30pm ET"
+  def nba_menu
+    puts "Next NBA game day"
+    nba = Schedule.new
+    puts "  #{nba.first_game_day}"
     input = gets.strip
-    case input
-    when "1"
-      puts "Cavs vs GSW"
-      game_info_cavs
-    end
+
   end
 
   def game_info_cavs
