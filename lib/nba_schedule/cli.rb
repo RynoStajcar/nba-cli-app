@@ -19,7 +19,15 @@ class Cli
       nba.first_day
       puts""
       puts "Type in a team to see their line up"
-      Teams.new(gets.strip)
+      input = gets.strip
+      input = Teams.new(input)
+      #binding.pry
+      puts""
+      puts"#{input.team_name}:"
+      puts ""
+      puts "Starters"
+      puts "-----------------"
+      input.starters
     when "2"
       nba.second_day
       puts""
