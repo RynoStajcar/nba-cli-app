@@ -8,18 +8,26 @@ class Teams
 
   @@nba_teams = []
 
-  def initialize
+  def initialize(input)
+    search(input)
     scrape_team
   end
 
+  def search(input)
+    if input.downcase.include?("b"&&"n"&&"k")
+      @selected_team = 'http://www.espn.com/nba/team/depth/_/name/bkn'
+      scrape_team
+    end
+  end
+
   def get_page
-    doc = Nokogiri::HTML(open('https://basketball.realgm.com/nba/depth-charts'))
+    doc = Nokogiri::HTML(open(@selected_team))
   end
 
   def scrape_team
-    get_page.css("h2.clearfix").each do |i|
-      @@nba_teams << i.text
-    end
     binding.pry
+
   end
+
+
 end
