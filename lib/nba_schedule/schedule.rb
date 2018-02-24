@@ -36,14 +36,23 @@ attr_accessor :first_game_day, :second_game_day, :third_game_day, :first_day_lin
 
   def first_day
       self.first_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+      puts ""
+      puts "Type team name for team line up"
+      puts "Type 'menu' to go back to main menu or type exit"
   end
 
   def second_day
-    self.second_day_line_up.each {|i| puts i}
+    self.second_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+    puts ""
+    puts "Type team name for team line up"
+    puts "Type 'menu' to go back to main menu or type exit"
   end
 
   def third_day
-    self.third_day_line_up.each {|i| puts i}
+    self.third_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+    puts ""
+    puts "Type team name for team line up"
+    puts "Type 'menu' to go back to main menu or type exit"
   end
 
 end
