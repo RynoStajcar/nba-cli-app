@@ -1,7 +1,3 @@
-require "pry"
-require 'nokogiri'
-require 'open_uri_redirections'
-
 class Teams
 
   attr_accessor :team_name, :team_starters
@@ -10,7 +6,6 @@ class Teams
 
   def initialize(input)
     search(input)
-    scrape_team
   end
 
   def get_page
@@ -31,24 +26,34 @@ class Teams
   end
 
   def search(input)
-    teams = []
     get_page.css("select.select-box option").each do |i|
-    if i.text.downcase.split(" ").include?(input)
+    if i.text.downcase.split(" ").include?(input.split(" ").first || input.split(" ").last)
         @selected_team = i.values[0]
         @selected_team.insert(0,"http:")
         scrape_team
-    else
       end
-        binding.pry
     end
   end
 
   def starters
-    self.team_starters.each {|player| puts player}
+    if self.team_starters == nil
+      puts "Try entering team name"
+      #binding.pry
+    else
+      puts"#{self.team_name}:"
+      puts ""
+      puts "Starters"
+      puts "-----------------"
+      self.team_starters.detect {|player| puts player}
+    end
   end
 
   def name
     self.team_name.each {|team| puts team.upcase}
+  end
+
+  def all
+    @all
   end
 
 end

@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require './lib/nba_schedule'
 
- Cli.new.call
+ basket_ball = Cli.new.call

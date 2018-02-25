@@ -1,6 +1,3 @@
-require "pry"
-require 'nokogiri'
-require 'open_uri_redirections'
 class  Schedule
 
 attr_accessor :first_game_day, :second_game_day, :third_game_day, :first_day_line_up, :second_day_line_up, :third_day_line_up
@@ -51,24 +48,8 @@ attr_accessor :first_game_day, :second_game_day, :third_game_day, :first_day_lin
   def third_day
     self.third_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
     puts ""
-    puts "Type team name for team line up"
+    puts "Type a team name to see their line up"
     puts "Type 'menu' to go back to main menu or type exit"
   end
 
 end
-
-
-
-
-
-
-
-
-
-# def scrape_game_week
-#   self.first_game_day = get_page.css("h2.table-caption")[0].text
-#   self.second_game_day = get_page.css("h2.table-caption")[1].text
-#   self.third_game_day = get_page.css("h2.table-caption")[2].text
-#   self.fourth_game_day = get_page.css("h2.table-caption")[3].text
-#   self.fifth_game_day = get_page.css("h2.table-caption")[4].text
-# end

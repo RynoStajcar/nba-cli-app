@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require "pry"
 class Cli
 
   def call
@@ -15,8 +14,7 @@ class Cli
     puts "3.  #{nba.third_day_line_up.size} games on #{nba.third_game_day}"
     puts "    Type 'exit' to leave menu"
       input = gets.strip
-      case input
-      when "1"
+      if input == "1"
         loop do
         space
         puts"#{nba.first_game_day}"
@@ -24,7 +22,7 @@ class Cli
         nba.first_day
         detailed_menu
         end
-      when "2"
+      elsif input == "2"
         loop do
         space
         puts"#{nba.second_game_day}"
@@ -32,27 +30,29 @@ class Cli
         nba.second_day
         detailed_menu
         end
-      when "3"
+      elsif input == "3"
         loop do
-        input = nil
         space
         puts"#{nba.third_game_day}"
         puts "------------------------"
         nba.third_day
         detailed_menu
         end
-      when "4"
+      elsif input == "exit"
+        exit
+      else
+        space
+        puts "Please use 1-3 to select a game day or exit to leave"
+        sleep 3
+        space
+        nba_menu
     end
   end
 
   def match_up_info(input)
-    input = Teams.new(input)
+    teams = Teams.new(input)
     space
-    puts"#{input.team_name}:"
-    puts ""
-    puts "Starters"
-    puts "-----------------"
-    input.starters
+    teams.starters
   end
 
   def detailed_menu
@@ -66,7 +66,6 @@ class Cli
         puts""
         puts "Hit enter to go back"
         gets.strip
-
       end
     end
 
