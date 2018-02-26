@@ -1,7 +1,5 @@
 class Teams
 
-  attr_accessor :team_name, :team_starters
-
   @starters = []
 
   def initialize(input)
@@ -18,10 +16,10 @@ class Teams
 
   def scrape_team
     starters = []
-    self.team_name = team_page.css("b").first.text
-    team_page.css("div.mod-content").each do |i|
+    @team_name = team_page.css("b").first.text
+    team_page.css("div.mod-content").each_with_index do |i, index|
       i.css("b").each {|player| starters << player.text}
-      self.team_starters = starters
+      @team_starters = starters
     end
   end
 
@@ -36,24 +34,19 @@ class Teams
   end
 
   def starters
-    if self.team_starters == nil
+    if @team_starters == nil
       puts "Try entering team name"
-      #binding.pry
     else
-      puts"#{self.team_name}:"
+      puts"#{@team_name}:"
       puts ""
       puts "Starters"
       puts "-----------------"
-      self.team_starters.detect {|player| puts player}
+      @team_starters.each {|player| puts player}
     end
   end
 
   def name
-    self.team_name.each {|team| puts team.upcase}
-  end
-
-  def all
-    @all
+    @team_name.each {|team| puts team.upcase}
   end
 
 end

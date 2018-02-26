@@ -1,9 +1,9 @@
 class  Schedule
 
-attr_accessor :first_game_day, :second_game_day, :third_game_day, :first_day_line_up, :second_day_line_up, :third_day_line_up
+  attr_accessor :game_days
 
   def initialize
-    self.scrape_game_day
+    scrape_game_day
   end
 
   def get_page
@@ -11,44 +11,59 @@ attr_accessor :first_game_day, :second_game_day, :third_game_day, :first_day_lin
   end
 
   def scrape_game_day
-    day_1 = []
-    day_2 = []
-    day_3 = []
-    self.first_game_day = get_page.css("h2.table-caption")[0].text
-    self.second_game_day = get_page.css("h2.table-caption")[1].text
-    self.third_game_day = get_page.css("h2.table-caption")[2].text
-    get_page.css("div.responsive-table-wrap").each_with_index do |i, day|
-      if day == 0
-        i.css("td span").collect {|team| day_1 << team.text}
-      elsif day == 1
-        i.css("td span").collect {|team| day_2 << team.text}
-      elsif day == 2
-        i.css("td span").collect {|team| day_3 << team.text}
+    week = [day_1 = [], day_2 = [], day_3 = [], day_4 = [], day_5 = [], day_6 = [], day_7 = []]
+    get_page.css("div.responsive-table-wrap").each_with_index {|i, day| i.css("td span").collect {|team| week[day] << team.text}}
+    @first_day_line_up = week[0].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
+    @second_day_line_up = week[1].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
+    @third_day_line_up = week[2].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
+    @forth_day_line_up = week[3].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
+    @fifth_day_line_up = week[4].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
+    @sixth_day_line_up = week[5].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
+    @seventh_day_line_up = week[6].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
+  end
+
+  def game_day
+    game_days = []
+      if get_page.css("h2.table-caption").children.count < 1
+        puts "There are currently no games"
+        sleep 3
+        exit
+      else
+        get_page.css("h2.table-caption").map.with_index {|day, n| game_days.push("#{n+1}. #{day.text}")}
       end
+    @game_days = game_days
+    @game_days.detect {|day| puts "#{day}"}
+  end
+
+  def game_day_games(input)
+    case input
+    when 1
+      @first_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+      option_list
+    when 2
+      @second_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+      option_list
+    when 3
+      @third_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+      option_list
+    when 4
+      @forth_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+      option_list
+    when 5
+      @fifth_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+      option_list
+    when 6
+      @sixth_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+      option_list
+    when 7
+      @seventh_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+      option_list
     end
-    self.first_day_line_up = day_1.each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
-    self.second_day_line_up = day_2.each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
-    self.third_day_line_up = day_3.each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
   end
 
-  def first_day
-      self.first_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
-      puts ""
-      puts "Type team name for team line up"
-      puts "Type 'menu' to go back to main menu or type exit"
-  end
-
-  def second_day
-    self.second_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
+  def option_list
     puts ""
     puts "Type team name for team line up"
-    puts "Type 'menu' to go back to main menu or type exit"
-  end
-
-  def third_day
-    self.third_day_line_up.map.with_index {|match, n| puts " #{n+1}  #{match}"}
-    puts ""
-    puts "Type a team name to see their line up"
     puts "Type 'menu' to go back to main menu or type exit"
   end
 
