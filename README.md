@@ -1,8 +1,7 @@
 # NbaSchedule
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nba_schedule`. To experiment with that code, run `bin/console` for an interactive prompt.
+  To start the program code, run `./bin/schedule` for an interactive prompt. You will go through a main menu list of the next seven upcoming NBA games for the season and their dates along with how many games are on each day. By selecting a day, you will view match-ups and be able to manually search for a team by either typing in the city their from or by team name. Note that one city (LA) has two teams so they will need to be search using the team name. This program gives the most up-to-date schdule and team line-ups, any player change to a line-up will be reflected once its confirmed.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -14,7 +13,7 @@ gem 'nba_schedule'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
