@@ -6,7 +6,13 @@ class Cli
     nba = Schedule.new
     puts ""
     puts "#{nba.game_day}"
-      input = gets.to_i
+    input = gets.to_i
+      if input > nba.game_days.count || input.to_i == 0
+        puts "Invalid selection, try entering the number beside the game day"
+        sleep 3
+        space
+        nba_menu
+      end
       loop do
       space
       puts"#{nba.game_days[input-1]}"
@@ -15,6 +21,7 @@ class Cli
       detailed_menu
     end
   end
+
 
   def match_up_info(input)
     teams = Teams.new(input)

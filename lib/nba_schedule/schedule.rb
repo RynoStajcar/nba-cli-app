@@ -33,10 +33,29 @@ class  Schedule
         sleep 3
         exit
       else
-        get_page.css("h2.table-caption").map.with_index {|day, n| game_days.push("#{n+1}. #{day.text}")}
+        get_page.css("h2.table-caption").map.with_index {|day, n| game_days.push("#{n+1}. #{day.text} -- #{how_many(n)} games")}
       end
     @game_days = game_days
     @game_days.detect {|day| puts "#{day}"}
+  end
+
+  def how_many(day)
+    case day
+    when 0
+      @first_day_line_up.count
+    when 1
+      @second_day_line_up.count
+    when 2
+      @third_day_line_up.count
+    when 3
+      @forth_day_line_up.count
+    when 4
+      @fifth_day_line_up.count
+    when 5
+      @sixth_day_line_up.count
+    when 6
+      @seventh_day_line_up.count
+    end
   end
 
   def game_day_games(input)
