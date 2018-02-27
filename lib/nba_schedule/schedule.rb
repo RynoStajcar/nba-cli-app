@@ -12,7 +12,11 @@ class  Schedule
 
   def scrape_game_day
     week = [day_1 = [], day_2 = [], day_3 = [], day_4 = [], day_5 = [], day_6 = [], day_7 = []]
-    get_page.css("div.responsive-table-wrap").each_with_index {|i, day| i.css("td span").collect {|team| week[day] << team.text}}
+    get_page.css("div.responsive-table-wrap").each_with_index do |i, day|
+      i.css("td span").each do |team|
+        week[day] << team.text
+      end
+    end
     @first_day_line_up = week[0].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
     @second_day_line_up = week[1].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }
     @third_day_line_up = week[2].each_slice(2).collect {|top| "#{top.first} vs #{top.last}(h)" }

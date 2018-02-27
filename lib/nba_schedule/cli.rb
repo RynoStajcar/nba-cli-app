@@ -24,6 +24,7 @@ class Cli
 
   def detailed_menu
     input = gets.strip
+    space
       if input == "menu"
         nba_menu
       elsif input == "exit"
