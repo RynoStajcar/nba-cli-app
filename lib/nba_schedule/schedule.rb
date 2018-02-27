@@ -1,4 +1,4 @@
-class  Schedule
+class  NbaSchedule::Schedule
 
   attr_accessor :game_days
 

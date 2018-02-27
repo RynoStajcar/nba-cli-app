@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
-class Cli
+class NbaSchedule::Cli
 
   def nba_menu
     puts "Welcome to NBA Game Day, select which game day you want to see!!"
-    nba = Schedule.new
+    nba = NbaSchedule::Schedule.new
     puts ""
     puts "#{nba.game_day}"
     input = gets.to_i
@@ -24,7 +24,7 @@ class Cli
 
 
   def match_up_info(input)
-    teams = Teams.new(input)
+    teams = NbaSchedule::Teams.new(input)
     space
     teams.starters
   end
