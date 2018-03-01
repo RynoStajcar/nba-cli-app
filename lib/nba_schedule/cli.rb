@@ -6,8 +6,11 @@ class NbaSchedule::Cli
     nba = NbaSchedule::Schedule.new
     puts ""
     puts "#{nba.game_day}"
+    puts "Enter 9 to exit program"
     input = gets.to_i
-      if input > nba.game_days.count || input.to_i == 0
+    if input == 9
+      exit
+    elsif input > nba.game_days.count || input.to_i == 0
         puts "Invalid selection, try entering the number beside the game day"
         sleep 3
         space
