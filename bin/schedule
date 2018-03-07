@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
-require './lib/nba_schedule'
+require_relative '../lib/nba_schedule'
 
- nba = NbaSchedule::Cli.new.nba_menu
+NbaSchedule::Cli.new.nba_menu
