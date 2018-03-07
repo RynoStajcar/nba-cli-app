@@ -5,7 +5,7 @@ class NbaSchedule::Cli
     puts "Welcome to NBA Game Day, select which game day you want to see!!"
     nba = NbaSchedule::Schedule.new
     puts ""
-    puts "#{nba.game_day}"
+    puts "#{nba.list_game_days}"
     puts "Enter 9 to exit program"
     input = gets.to_i
     if input == 9
