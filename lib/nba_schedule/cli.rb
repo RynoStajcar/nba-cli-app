@@ -33,6 +33,9 @@ class NbaSchedule::Cli
   end
 
   def detailed_menu
+    puts ""
+    puts "Type team name for team line up"
+    puts "Type 'menu' to go back to main menu or type exit"
     input = gets.strip
     space
       if input == "menu"

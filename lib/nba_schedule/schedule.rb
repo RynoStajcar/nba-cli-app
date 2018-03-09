@@ -43,9 +43,6 @@ class  NbaSchedule::Schedule
 
   def game_day_games(input)
     @week[input-1].map.with_index {|match, n| puts " #{n+1}  #{match}"}
-    puts ""
-    puts "Type team name for team line up"
-    puts "Type 'menu' to go back to main menu or type exit"
   end
 
 end
