@@ -2,12 +2,18 @@ class  NbaSchedule::Schedule
 
   attr_accessor :game_days, :week
 
+  @@all = []
+
   def initialize
     check_for_games
   end
 
   def get_page
     doc = Nokogiri::HTML(open('http://www.espn.com/nba/schedule'))
+  end
+
+  def self.all
+    @@all
   end
 
   def check_for_games

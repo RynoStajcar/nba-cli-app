@@ -1,9 +1,18 @@
 class NbaSchedule::Teams
 
-  @starters = []
+  attr_accessor :selected_team, :team_name, :team_starters
+
+  @@all = []
+
+
 
   def initialize(input)
     search(input)
+    @@all << self
+  end
+
+  def self.all
+    @@all
   end
 
   def get_page
@@ -14,9 +23,12 @@ class NbaSchedule::Teams
     doc = Nokogiri::HTML(open(@selected_team))
   end
 
-  def scrape_team
-    starters = []
+  def scrape_team_name
     @team_name = team_page.css("b").first.text
+  end
+
+  def scrape_team_starters
+    starters = []
     team_page.css("div.mod-content").each_with_index do |i, index|
       i.css("b").each {|player| starters << player.text}
       @team_starters = starters
@@ -24,29 +36,23 @@ class NbaSchedule::Teams
   end
 
   def search(input)
+    input = input.downcase
     get_page.css("select.select-box option").each do |i|
     if i.text.downcase.split(" ").include?(input.split(" ").first || input.split(" ").last)
         @selected_team = i.values[0]
         @selected_team.insert(0,"http:")
-        scrape_team
+        scrape_team_name
+        scrape_team_starters
       end
     end
   end
 
-  def starters
-    if @team_starters == nil
-      puts "Try entering team name"
-    else
-      puts"#{@team_name}:"
-      puts ""
-      puts "Starters"
-      puts "-----------------"
-      @team_starters.each {|player| puts player}
-    end
+  def name
+    @team_name
   end
 
-  def name
-    @team_name.each {|team| puts team.upcase}
+  def starters
+    @team_starters.detect {|player| puts player}
   end
 
 end

@@ -25,13 +25,6 @@ class NbaSchedule::Cli
     end
   end
 
-
-  def match_up_info(input)
-    teams = NbaSchedule::Teams.new(input)
-    space
-    teams.starters
-  end
-
   def detailed_menu
     puts ""
     puts "Type team name for team line up"
@@ -39,6 +32,7 @@ class NbaSchedule::Cli
     input = gets.strip
     space
       if input == "menu"
+        binding.pry
         nba_menu
       elsif input == "exit"
         exit
@@ -47,6 +41,20 @@ class NbaSchedule::Cli
         puts""
         puts "Hit enter to go back"
         gets.strip
+      end
+    end
+
+    def match_up_info(input)
+      team = NbaSchedule::Teams.new(input)
+      space
+      if team.team_starters == nil
+        puts "Try entering team name"
+      else
+        puts"#{team.name}:"
+        puts ""
+        puts "Starters"
+        puts "-----------------"
+        puts "#{team.starters}"
       end
     end
 
